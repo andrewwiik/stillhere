@@ -14,6 +14,7 @@
 	return TRUE;
 }
 %end
+
 %hook TUFaceTimeVideoCall
 - (void)setIsSendingVideo:(BOOL)arg1 {
 	%orig(TRUE);
@@ -22,40 +23,56 @@
 	return TRUE;
 }
 %end
+
 %hook TUFaceTimeCall
 - (BOOL)isUplinkMuted {
 	return FALSE;
 }
 - (BOOL)setUplinkMuted:(BOOL)arg1 {
 	arg1 = FALSE;
+	%orig(FALSE);
 	return FALSE;
 }
 %end
+
 %hook TUCall
 - (BOOL)isSendingVideo {
 	return TRUE;
 }
 - (BOOL)setUplinkMuted:(BOOL)arg1 {
 	arg1 = FALSE;
+	%orig(FALSE);
 	return FALSE;
 }
+
 - (BOOL)isUplinkMuted {
 	return FALSE;
+
 }
+
 %end
+
 %hook CMVideoCapture
 -(int)stop:(bool)arg1 {
+
 return %orig(NO);
+
 }
 %end
+
 %hook CannedVideoCapture
 -(void)stopThreads {
 }
+
 -(int)stop:(bool)arg1 {
+
 return %orig(NO);
+
 }
 %end
+
 %hook VideoConferenceManager
 -(void)stopSIP {
+
 }
 %end
